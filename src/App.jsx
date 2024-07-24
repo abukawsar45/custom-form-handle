@@ -1,6 +1,6 @@
 import './App.css';
 import CustomSelect from './components/CustomSelect';
-import {  useState } from 'react';
+import { useState } from 'react';
 import Input from './utils/input/Input';
 
 function App() {
@@ -25,9 +25,11 @@ function App() {
 
   const handleClearSingleForm = (searchText) => {
     setSearchSingleValue('');
+    setSelectSingleValue('');
   };
   const handleClearMultiForm = (searchText) => {
     setSearchMultiValue('');
+    setSelectMultiValue([]);
   };
 
   const handleSingleMenuOpen = () => {
@@ -54,12 +56,14 @@ function App() {
 
   // handle added single list
   const handleAddedSingleList = (data) => {
-    const uniqueId = generateUniqueId(allSingleData);
-    const myData = {
-      id: uniqueId,
-      name: data,
-    };
-    setAllSingleData([myData, ...allSingleData]);
+    if (data) {
+      const uniqueId = generateUniqueId(allSingleData);
+      const myData = {
+        id: uniqueId,
+        name: data,
+      };
+      setAllSingleData([myData, ...allSingleData]);
+    }
   };
   // handle selected multiple/group value
   const handleMultipleValue = ({ type, name }) => {
@@ -103,13 +107,19 @@ function App() {
   };
 
   const handleModeSelection = (type) => {
-      setSelectSingleValue('')
-      // setAllSingleData([])
-      setSelectMultiValue([]);
-      // setStoreAllMultiData([]);
-      setIsMultiMode(type);
+    setSelectSingleValue('');
+    // setAllSingleData([])
+    setSelectMultiValue([]);
+    // setStoreAllMultiData([]);
+    setSearchMultiValue('');
+    setSearchSingleValue('');
+    setIsMultiMode(type);
+  };
 
-    };
+  const handleMultiDisabled = () => {
+    // setSelectMultiValue([]);
+    setIsDisabledMulti(!isDisabledMulti);
+  };
   // console.log(isMultiMode);
   return (
     <div className='App'>
@@ -142,7 +152,7 @@ function App() {
           isClearable={handleClearMultiForm}
           isSearchable={true}
           isDisabled={isDisabledMulti}
-          setIsDisabled={setIsDisabledMulti}
+          setIsDisabled={handleMultiDisabled}
           options={options}
           value={searchMultiValue}
           setSearchValue={setSearchMultiValue}

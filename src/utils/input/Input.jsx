@@ -8,6 +8,7 @@ const Input = ({
   htmlFor,
   label,
   defaultChecked,
+  disabled,
 }) => {
   return (
     <>
@@ -17,6 +18,7 @@ const Input = ({
         name={name}
         id={id}
         defaultChecked={defaultChecked}
+        disabled={disabled}
       />
       <label htmlFor={htmlFor}>{label} </label>
     </>

@@ -15,7 +15,6 @@
   flex-direction: row;
 }
 
-
 .kzui-left_container {
   width: 50%;
 }
@@ -41,7 +40,7 @@
   color: white;
   /* padding: 2px 3px; */
 }
-.kzui-btn_clear:hover {
+.kzui-btn_clear_hover {
   background: rgb(223, 11, 11);
 }
 .kzui-btn_add {
@@ -56,12 +55,7 @@
 .kzui-add_btn_hover:hover {
   background: rgb(18, 179, 28);
 }
-.kzui-university_name {
-  margin: 2px 4px;
-  padding: 1px 3px 1px 0;
-  width: 165px;
-  background: #62baca;
-}
+
 .kzui-selected_text {
   margin: 2px 4px;
   padding: 1px 3px 1px 0;
@@ -83,11 +77,11 @@
   display: inline-block;
   background-color: #fff;
 }
-.kzui-added_list_div{
+.kzui-added_list_div {
   display: flex;
   justify-content: start;
   align-items: center;
-  gap:20px;
+  gap: 20px;
 }
 
 .kzui-delete_button {
@@ -104,7 +98,7 @@
   background: rgb(223, 11, 11);
 }
 
-
+/* responsive for mid device */
 @media (max-width: 768px) {
   .kzui-main_container {
     flex-direction: column;
@@ -113,4 +107,3 @@
     width: 100%;
   }
 }
-
