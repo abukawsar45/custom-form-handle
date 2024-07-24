@@ -102,14 +102,19 @@ function App() {
     setStoreAllMultiData(restData);
   };
 
-    const handleClick = () => {
-      setIsMultiMode(!isMultiMode);
+  const handleModeSelection = (type) => {
+      setSelectSingleValue('')
+      // setAllSingleData([])
+      setSelectMultiValue([]);
+      // setStoreAllMultiData([]);
+      setIsMultiMode(type);
+
     };
   // console.log(isMultiMode);
   return (
     <div className='App'>
       <h1 className='title'>Custom Selected Form </h1>
-      <div onClick={() => setIsMultiMode(false)}>
+      <div onClick={() => handleModeSelection(false)}>
         <Input
           className='kzui-checkbox_custom'
           type='radio'
@@ -119,9 +124,8 @@ function App() {
           label='Single Mode'
           defaultChecked={true}
         />
-      
       </div>
-      <div onClick={() => setIsMultiMode(true)}>
+      <div onClick={() => handleModeSelection(true)}>
         <Input
           className='kzui-checkbox_custom'
           type='radio'
