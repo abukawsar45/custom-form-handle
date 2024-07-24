@@ -1,14 +1,10 @@
-
-
 import './App.css';
 import CustomSelect from './components/CustomSelect';
-import { useState } from 'react';
-import Input from './utils/input/Input';
+import {  useState } from 'react';
 
 function App() {
   const options = ['Duet', 'Buet', 'Kuet', 'Cuet', 'Ruet'];
 
-  const [isMultiMode, setIsMultiMode] = useState(false);
   const [isDisabledSingle, setIsDisabledSingle] = useState(false);
   const [isDisabledMulti, setIsDisabledMulti] = useState(false);
   const [searchSingleValue, setSearchSingleValue] = useState('');
@@ -27,11 +23,9 @@ function App() {
 
   const handleClearSingleForm = (searchText) => {
     setSearchSingleValue('');
-    setSelectSingleValue('');
   };
   const handleClearMultiForm = (searchText) => {
     setSearchMultiValue('');
-    setSelectMultiValue([]);
   };
 
   const handleSingleMenuOpen = () => {
@@ -58,14 +52,12 @@ function App() {
 
   // handle added single list
   const handleAddedSingleList = (data) => {
-    if (data) {
-      const uniqueId = generateUniqueId(allSingleData);
-      const myData = {
-        id: uniqueId,
-        name: data,
-      };
-      setAllSingleData([myData, ...allSingleData]);
-    }
+    const uniqueId = generateUniqueId(allSingleData);
+    const myData = {
+      id: uniqueId,
+      name: data,
+    };
+    setAllSingleData([myData, ...allSingleData]);
   };
   // handle selected multiple/group value
   const handleMultipleValue = ({ type, name }) => {
@@ -108,88 +100,54 @@ function App() {
     setStoreAllMultiData(restData);
   };
 
-  const handleModeSelection = (type) => {
-    setSelectSingleValue('');
-    // setAllSingleData([])
-    setSelectMultiValue([]);
-    // setStoreAllMultiData([]);
-    setSearchMultiValue('');
-    setSearchSingleValue('');
-    setIsDisabledSingle(false);
-    setIsDisabledMulti(false);
-    setIsMultiMode(type);
-  };
-
-  // console.log(isDisabledSingle, isDisabledMulti);
   return (
     <div className='App'>
       <h1 className='title'>Custom Selected Form </h1>
-      <div onClick={() => handleModeSelection(false)}>
-        <Input
-          className='kzui-checkbox_custom'
-          type='radio'
-          name='isSingleMode'
-          id='singleMode'
-          htmlFor='singleMode'
-          label='Single Mode'
-          defaultChecked={true}
-        />
-      </div>
-      <div onClick={() => handleModeSelection(true)}>
-        <Input
-          className='kzui-checkbox_custom'
-          type='radio'
-          name='isSingleMode'
-          id='multiMode'
-          htmlFor='multiMode'
-          label='Multi Mode'
-        />
-      </div>
+      {/* for single form */}
+      <CustomSelect
+        formType='Single Form'
+        isClearable={handleClearSingleForm}
+        isSearchable={true}
+        isDisabled={isDisabledSingle}
+        setIsDisabled={setIsDisabledSingle}
+        options={options}
+        value={searchSingleValue}
+        setSearchValue={setSearchSingleValue}
+        placeholder='Select a university'
+        isGrouped={false}
+        isMulti={false}
+        onChangeHandler={handleAddedSingleList}
+        onMenuOpen={handleSingleMenuOpen}
+        onSearchHandler={handleSearch}
+        allSelectedData={allSingleData}
+        selectValue={selectSingleValue}
+        setSelectValue={setSelectSingleValue}
+        handleDelete={handleDeleteSingle}
+      />
 
-      {isMultiMode ? (
-        <CustomSelect
-          formType='Multi Form'
-          isClearable={handleClearMultiForm}
-          isSearchable={true}
-          isDisabledMulti={isDisabledMulti}
-          
-          setIsDisabledMulti={setIsDisabledMulti}
-          options={options}
-          value={searchMultiValue}
-          setSearchValue={setSearchMultiValue}
-          placeholder='Select a university'
-          isGrouped={true}
-          isMulti={isMultiMode}
-          onChangeHandler={handleAddedMultiList}
-          onMenuOpen={handleMultiMenuOpen}
-          onSearchHandler={handleMultiSearch}
-          allSelectedData={storeAllMultiData}
-          selectValue={selectMultiValue}
-          setSelectValue={handleMultipleValue}
-          handleDelete={handleDeleteMultiple}
-        />
-      ) : (
-        <CustomSelect
-          formType='Single Form'
-          isClearable={handleClearSingleForm}
-          isSearchable={true}
-          isDisabled={isDisabledSingle}
-          setIsDisabled={setIsDisabledSingle}
-          options={options}
-          value={searchSingleValue}
-          setSearchValue={setSearchSingleValue}
-          placeholder='Select a university'
-          isGrouped={false}
-          isMulti={isMultiMode}
-          onChangeHandler={handleAddedSingleList}
-          onMenuOpen={handleSingleMenuOpen}
-          onSearchHandler={handleSearch}
-          allSelectedData={allSingleData}
-          selectValue={selectSingleValue}
-          setSelectValue={setSelectSingleValue}
-          handleDelete={handleDeleteSingle}
-        />
-      )}
+      <div style={{ marginTop: '50px' }}></div>
+
+      {/* for Multi form */}
+      <CustomSelect
+        formType='Multi Form'
+        isClearable={handleClearMultiForm}
+        isSearchable={true}
+        isDisabled={isDisabledMulti}
+        setIsDisabled={setIsDisabledMulti}
+        options={options}
+        value={searchMultiValue}
+        setSearchValue={setSearchMultiValue}
+        placeholder='Select a university'
+        isGrouped={true}
+        isMulti={true}
+        onChangeHandler={handleAddedMultiList}
+        onMenuOpen={handleMultiMenuOpen}
+        onSearchHandler={handleMultiSearch}
+        allSelectedData={storeAllMultiData}
+        selectValue={selectMultiValue}
+        setSelectValue={handleMultipleValue}
+        handleDelete={handleDeleteMultiple}
+      />
     </div>
   );
 }
