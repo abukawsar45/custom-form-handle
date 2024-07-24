@@ -71,9 +71,6 @@
 .kzui-clickable {
   cursor: pointer;
 }
-.kzui-university_name_hover:hover {
-  background: #0eb4b4;
-}
 
 .kzui-display_flex input {
   height: 16px;

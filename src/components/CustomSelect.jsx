@@ -77,14 +77,7 @@ const CustomSelect = ({
                               value.toLowerCase() === option.toLowerCase()
                                 ? 'kzui-selected_text'
                                 : 'kzui-university_name'
-                            } ${
-                              !isDisabled &&
-                              'kzui-clickable kzui-university_name_hover'
                             }`}
-                            onClick={(e) =>
-                              !isDisabled && setSearchValue(option)
-                            }
-                            value={option}
                           >
                             {option}
                           </option>
@@ -94,14 +87,7 @@ const CustomSelect = ({
                               value.toLowerCase() === option.toLowerCase()
                                 ? 'kzui-selected_text'
                                 : 'kzui-university_name'
-                            } ${
-                              !isDisabled &&
-                              'kzui-clickable kzui-university_name_hover'
-                            }`}
-                            onClick={(e) =>
-                              !isDisabled && setSearchValue(option)
-                            }
-                            value={option}
+                            } `}
                           >
                             {option}
                           </option>
