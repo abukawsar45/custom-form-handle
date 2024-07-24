@@ -65,7 +65,7 @@ const CustomSelect = ({
                     value && 'kzui-clickable kzui-btn_clear_hover'
                   }`}
                   onClick={isClearable}
-                  disabled={selectValue.length === 0}
+                  disabled={!value}
                 >
                   Clear
                 </button>
