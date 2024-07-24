@@ -1,0 +1,119 @@
+.kzui-margin_top {
+  margin-top: 20px;
+}
+
+.kzui-display_flex {
+  display: flex;
+  align-items: start;
+}
+
+.kzui-main_container {
+  display: flex;
+  align-items: start;
+
+  gap: 20px;
+  flex-direction: row;
+}
+
+
+.kzui-left_container {
+  width: 50%;
+}
+
+.kzui-opinions_box {
+  position: relative;
+  width: 200px;
+}
+
+.kzui-search_box {
+  height: 20px;
+  padding: 2px 3px;
+  outline: 1px solid transparent cadetblue;
+  outline-offset: 1px;
+}
+
+.kzui-btn_clear {
+  margin-left: 8px;
+  height: 27px;
+  background: rgb(224, 77, 77);
+  border: none;
+  border-radius: 4px;
+  color: white;
+  /* padding: 2px 3px; */
+}
+.kzui-btn_clear:hover {
+  background: rgb(223, 11, 11);
+}
+.kzui-btn_add {
+  margin: 6px 0;
+  height: 27px;
+  background: rgb(62, 195, 71);
+  border: none;
+  border-radius: 4px;
+  color: white;
+}
+
+.kzui-add_btn_hover:hover {
+  background: rgb(18, 179, 28);
+}
+.kzui-university_name {
+  margin: 2px 4px;
+  padding: 1px 3px 1px 0;
+  width: 165px;
+  background: #62baca;
+}
+.kzui-selected_text {
+  margin: 2px 4px;
+  padding: 1px 3px 1px 0;
+  width: 165px;
+  background: #eee205;
+}
+.kzui-clickable {
+  cursor: pointer;
+}
+.kzui-university_name_hover:hover {
+  background: #0eb4b4;
+}
+
+.kzui-display_flex input {
+  height: 16px;
+}
+
+.kzui-checkbox_custom {
+  width: 14px;
+  height: 14px;
+  border: 1px solid #000;
+  display: inline-block;
+  background-color: #fff;
+}
+.kzui-added_list_div{
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  gap:20px;
+}
+
+.kzui-delete_button {
+  margin-left: 8px;
+  height: 27px;
+  cursor: pointer;
+  background: rgb(224, 77, 77);
+  border: none;
+  border-radius: 4px;
+  color: white;
+  /* padding: 2px 3px; */
+}
+.kzui-delete_button:hover {
+  background: rgb(223, 11, 11);
+}
+
+
+@media (max-width: 768px) {
+  .kzui-main_container {
+    flex-direction: column;
+  }
+  .kzui-left_container {
+    width: 100%;
+  }
+}
+
