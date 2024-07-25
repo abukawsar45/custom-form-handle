@@ -1,87 +1,118 @@
-.kzui-margin_top {
-  margin-top: 20px;
-}
 
-.kzui-display_flex {
-  display: flex;
-  align-items: start;
-}
-
-.kzui-main_container {
-  display: flex;
-  align-items: start;
-
-  gap: 20px;
-  flex-direction: row;
-}
-
-.kzui-left_container {
-  width: 50%;
-}
-
-.kzui-opinions_box {
-  position: relative;
-  width: 200px;
-}
-
-.kzui-search_box {
-  height: 20px;
-  padding: 2px 3px;
-  outline: 1px solid transparent cadetblue;
-  outline-offset: 1px;
-}
-
-.kzui-btn_clear {
-  margin-left: 8px;
-  height: 27px;
-  background: rgb(224, 77, 77);
-  border: none;
-  border-radius: 4px;
-  color: white;
-  /* padding: 2px 3px; */
-}
-.kzui-btn_clear_hover {
-  background: rgb(223, 11, 11);
-}
-.kzui-btn_add {
-  margin: 6px 0;
-  height: 27px;
-  background: rgb(62, 195, 71);
-  border: none;
-  border-radius: 4px;
-  color: white;
-}
-
-.kzui-add_btn_hover:hover {
-  background: rgb(18, 179, 28);
-}
-
-.kzui-selected_text {
-  margin: 2px 4px;
-  padding: 1px 3px 1px 0;
-  width: 165px;
-  background: #eee205;
-}
+/* reusable */
 .kzui-clickable {
   cursor: pointer;
 }
 
-.kzui-display_flex input {
-  height: 16px;
+/* reusable */
+.kzui-margin_top{
+  margin-top: 24px;
 }
 
-.kzui-checkbox_custom {
-  width: 14px;
-  height: 14px;
-  border: 1px solid #000;
-  display: inline-block;
+.kzui-main_container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.kzui-added_list {
+  width: 50%;
+}
+
+.kzui-input_container {
+  position: relative;
+}
+
+
+.kzui-search_box_container {
+  width: 500px;
+  display: flex;
+  align-items: center;
+  border: 1px solid #ccc;
+  padding: 5px;
+  border-radius: 4px;
   background-color: #fff;
 }
-.kzui-added_list_div {
+
+
+.kzui-multi_value {
+  margin: 2px;
   display: flex;
-  justify-content: start;
   align-items: center;
-  gap: 20px;
+  padding: 2px 5px;
+  background-color: rgb(235, 226, 226);
+  border-radius: 4px;
+}
+
+.kzui-single_value {
+  display: flex;
+  align-items: center;
+  background-color: rgb(235, 226, 226);
+  padding: 2px 5px;
+  border-radius: 4px;
+  margin: 2px;
+}
+
+.kzui-search_box {
+  /* flex: 1; */
+  position: relative;
+  width: 80%;
+  border: none;
+  outline: none;
+  padding: 5px;
+  font-size: 16px;
+}
+
+.kzui-button_clear {
+  position: absolute;
+  right: 5px;
+  margin-left: 8px;
+  height: 32px;
+  background: rgb(224, 174, 174);
+  border: none;
+  border-radius: 4px;
+  color: rgb(25, 23, 23);
+  /* padding: 2px 3px; */
+}
+
+.kzui-btn_clear_hover:hover {
+  background: rgb(215, 113, 113);
+}
+
+.kzui-remove_button {
+  background: none;
+  border: none;
+  font-size: 16px;
+  margin-left: 5px;
+  color: #333;
+}
+
+.kzui-options_container {
+  margin-top: 10px;
+}
+
+.kzui-option {
+  padding: 5px;
+  border: 1px;
+}
+
+
+.kzui-btn_add {
+  background-color: #5294da;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  margin-top: 10px;
+  border-radius: 5px;
+}
+.kzui-add_btn_hover:hover {
+  background-color: #007bff;
+}
+
+
+.kzui-display_flex {
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .kzui-delete_button {
@@ -98,12 +129,28 @@
   background: rgb(223, 11, 11);
 }
 
-/* responsive for mid device */
+/* responsive */
 @media (max-width: 768px) {
   .kzui-main_container {
     flex-direction: column;
   }
-  .kzui-left_container {
+
+  .kzui-added_list {
     width: 100%;
+  }
+
+  .kzui-search_box {
+    width: 100%;
+    font-size: 14px;
+  }
+
+  .kzui-button_clear {
+    position: static;
+    margin-left: 5px;
+  }
+
+  .kzui-btn_add {
+    width: 20%;
+    text-align: center;
   }
 }

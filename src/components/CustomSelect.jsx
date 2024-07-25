@@ -1,6 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './CustomSelect.css';
-import Input from '../utils/input/Input';
 
 const CustomSelect = ({
   formType,
@@ -8,257 +7,181 @@ const CustomSelect = ({
   isSearchable,
   isDisabled,
   isDisabledMulti,
-  setIsDisabledMulti,
-  setIsDisabled,
   options,
   value,
   placeholder,
-  isGrouped,
-  setSearchValue,
   isMulti,
   onChangeHandler,
-  onMenuOpen,
   onSearchHandler,
   allSelectedData,
   selectValue,
   setSelectValue,
   handleDelete,
-})=> {
-   return (
-     <div className=' kzui-main_container'>
-       <div className='kzui-left_container'>
-         {' '}
-         <div>
-           <h4>{formType}</h4>
+  onMenuOpen,
+}) => {
+  const [inputValue, setInputValue] = useState('');
 
-           {/* search box */}
-           <div>
-             <div className=''>
-               <div>
-                 {' '}
-                 {isMulti ? (
-                   <h4>Select your all favorites university</h4>
-                 ) : (
-                   <h4>Select your favorite university</h4>
-                 )}
-               </div>
-               {isMulti ? (
-                 <input
-                   type='text'
-                   className='kzui-search_box'
-                   value={value}
-                   placeholder={placeholder}
-                   onChange={isSearchable ? onSearchHandler : null}
-                   disabled={isDisabledMulti}
-                 />
-               ) : (
-                 <input
-                   type='text'
-                   className='kzui-search_box'
-                   value={value}
-                   placeholder={placeholder}
-                   onChange={isSearchable ? onSearchHandler : null}
-                   disabled={isDisabled}
-                 />
-               )}
-               {isMulti ? (
-                 <button
-                   className={`kzui-btn_clear ${
-                     value && 'kzui-clickable kzui-btn_clear_hover'
-                   }`}
-                   onClick={isClearable}
-                   disabled={!value}
-                 >
-                   Clear
-                 </button>
-               ) : (
-                 <button
-                   className={`kzui-btn_clear ${
-                     value && 'kzui-clickable kzui-btn_clear_hover'
-                   }`}
-                   onClick={isClearable}
-                   disabled={!value}
-                 >
-                   Clear
-                 </button>
-               )}
-             </div>
-             {/* university name */}
-             <div className=''>
-               {
-                 <div className=''>
-                   {options
-                     .filter((option) =>
-                       isSearchable
-                         ? option.toLowerCase().includes(value.toLowerCase())
-                         : true
-                     )
-                     .map((option, ind) => (
-                       <div key={option + ind + 'a'}>
-                         {isMulti ? (
-                           <div
-                             className={`kzui-display_flex ${
-                               value.toLowerCase() === option.toLowerCase()
-                                 ? 'kzui-selected_text'
-                                 : ''
-                             } `}
-                             key={option + ind + 'abab'}
-                             onChange={(e) =>
-                               !isDisabledMulti &&
-                               setSelectValue({
-                                 type: e.target.checked,
-                                 name: option,
-                               })
-                             }
-                           >
-                             <Input
-                               className='kzui-checkbox_custom  '
-                               type='checkbox'
-                               name='university_name'
-                               id={option + ind}
-                               htmlFor={option + ind}
-                               label={option}
-                               disabled={isDisabledMulti}
-                             />
-                           </div>
-                         ) : (
-                           <div
-                             className={`kzui-display_flex ${
-                               value.toLowerCase() === option.toLowerCase()
-                                 ? 'kzui-selected_text'
-                                 : ''
-                             } `}
-                             key={option + ind + 'ab'}
-                             onChange={(e) =>
-                               !isDisabled && setSelectValue(option)
-                             }
-                           >
-                             <Input
-                               className='kzui-checkbox_custom'
-                               type='radio'
-                               name='uni_name'
-                               id={option}
-                               htmlFor={option}
-                               label={option}
-                               disabled={isDisabled}
-                             />
-                           </div>
-                         )}
-                       </div>
-                     ))}
-                 </div>
-               }
-             </div>
-             <div className='kz'>
-               {' '}
-               {isMulti ? (
-                 <button
-                   type='submit'
-                   disabled={isDisabledMulti}
-                   className={`kzui-btn_add ${
-                     !isDisabledMulti &&
-                     selectValue.length !== 0 &&
-                     'kzui-clickable kzui-add_btn_hover'
-                   }`}
-                   onClick={() => onChangeHandler(selectValue)}
-                 >
-                   Add
-                 </button>
-               ) : (
-                 <button
-                   type='submit'
-                   disabled={isDisabled}
-                   className={`kzui-btn_add ${
-                     !isDisabled &&
-                     selectValue &&
-                     'kzui-clickable kzui-add_btn_hover'
-                   }`}
-                   onClick={() => onChangeHandler(selectValue)}
-                 >
-                   Add
-                 </button>
-               )}
-             </div>
-             <div className='kzui-display_flex '>
-               {isMulti && (
-                 <>
-                   <input
-                     onClick={(e) => setIsDisabledMulti(!isDisabledMulti)}
-                     type='checkbox'
-                     name='disabledMulti'
-                     id='disabledMulti'
-                     checked={isDisabledMulti}
-                   />
-                   <label htmlFor='disabledMulti'>Disabled </label>
-                 </>
-               )}{' '}
-               {!isMulti && (
-                 <>
-                   <input
-                     onClick={(e) => setIsDisabled(e.target.checked)}
-                     type='checkbox'
-                     name='disabled'
-                     id='disabled'
-                   />
-                   <label htmlFor='disabled'>Disabled </label>
-                 </>
-               )}
-             </div>
-           </div>
-         </div>
-         <div className='kzui-margin_top kzui-menu_box'>
-           <button onClick={() => onMenuOpen()} className='kzui-menu_button'>
-             Menu
-           </button>
-         </div>
-       </div>
-       {/* added data */}
-       <div className='kzui-added_list'>
-         <h4>My added list</h4>
-         <div>
-           {isMulti ? (
-             <>
-               {allSelectedData.length > 0 &&
-                 allSelectedData.map((singleData, ind) => (
-                   <div key={singleData.id} className='kzui-added_list_div'>
-                     <p>{ind + 1}.</p>
-                     <ul>
-                       {singleData.data.map((sinData) => (
-                         <li key={sinData.name + 1221}>{sinData.name} </li>
-                       ))}
-                     </ul>
-                     <button
-                       className='kzui-delete_button'
-                       onClick={() => handleDelete(singleData.id)}
-                     >
-                       Delete
-                     </button>
-                   </div>
-                 ))}
-             </>
-           ) : (
-             <>
-               {allSelectedData.length > 0 &&
-                 allSelectedData.map((singleData, ind) => (
-                   <div key={singleData.id} className='kzui-added_list_div'>
-                     <p>
-                       {ind + 1}. {singleData.name}{' '}
-                     </p>
-                     <button
-                       className='kzui-delete_button'
-                       onClick={() => handleDelete(singleData.id)}
-                     >
-                       Delete
-                     </button>
-                   </div>
-                 ))}
-             </>
-           )}
-         </div>
-       </div>
-     </div>
-   );
- };
+  const handleInputChange = (event) => {
+    setInputValue(event.target.value);
+    onSearchHandler(event);
+  };
 
- export default CustomSelect;
+  const handleSelectOption = (option) => {
+    if (isMulti) {
+      setSelectValue((prev) => {
+        const alreadySelected = prev.find((item) => item.name === option);
+        if (alreadySelected) return prev.filter((item) => item.name !== option);
+        return [...prev, { name: option }];
+      });
+    } else {
+      setSelectValue(option);
+    }
+    setInputValue('');
+  };
 
+  const handleRemoveOption = (option) => {
+    if (isMulti) {
+      setSelectValue((prev) => prev.filter((item) => item.name !== option));
+    } else {
+      setSelectValue('');
+    }
+  };
+
+  return (
+    <>
+      <div className='kzui-main_container'>
+        <div className='kzui-left_container'>
+          <h4>{formType}</h4>
+          <div>
+            <h4>
+              {isMulti
+                ? 'Select your favorite universities'
+                : 'Select your favorite university'}
+            </h4>
+            <div className='kzui-input_container'>
+              <div className='kzui-search_box_container'>
+                {isMulti &&
+                  selectValue.map((item, index) => (
+                    <div key={index} className='kzui-multi_value'>
+                      {item.name}
+                      <button
+                        type='button'
+                        className={`kzui-remove_button kzui-clickable`}
+                        onClick={() => handleRemoveOption(item.name)}
+                      >
+                        &times;
+                      </button>
+                    </div>
+                  ))}
+                {!isMulti && selectValue && (
+                  <div className='kzui-single_value'>
+                    {selectValue}
+                    <button
+                      type='button'
+                      className='kzui-remove_button kzui-clickable'
+                      onClick={() => handleRemoveOption(selectValue)}
+                    >
+                      &times;
+                    </button>
+                  </div>
+                )}
+                <input
+                  type='text'
+                  className='kzui-search_box'
+                  value={inputValue}
+                  placeholder={
+                    isMulti
+                      ? selectValue.length === 0 && placeholder
+                      : !selectValue && placeholder
+                  }
+                  onChange={handleInputChange}
+                  disabled={isMulti ? isDisabledMulti : isDisabled}
+                />
+                {isClearable && (
+                  <button
+                    className={`kzui-button_clear ${
+                      isMulti
+                        ? value.length !== 0 &&
+                          'kzui-clickable kzui-btn_clear_hover'
+                        : value && 'kzui-clickable kzui-btn_clear_hover'
+                    }`}
+                    onClick={() => {
+                      setInputValue('');
+                      if (isMulti) setSelectValue([]);
+                      else setSelectValue('');
+                    }}
+                    disabled={isMulti ? value.length === 0 : !value}
+                  >
+                    Clear
+                  </button>
+                )}
+              </div>
+            </div>
+            <div className='kzui-options_container'>
+              {options
+                .filter((option) =>
+                  isSearchable
+                    ? option.toLowerCase().includes(inputValue.toLowerCase())
+                    : true
+                )
+                .filter(
+                  (option) =>
+                    !isMulti ||
+                    !selectValue.some((item) => item.name === option)
+                )
+                .map((option, index) => (
+                  <div
+                    key={index}
+                    className='kzui-option kzui-clickable'
+                    onClick={() => handleSelectOption(option)}
+                  >
+                    {option}
+                  </div>
+                ))}
+            </div>
+          </div>
+          <button
+            type='submit'
+            className={`kzui-btn_add ${
+              isMulti?(selectValue.length!==0 && 'kzui-clickable kzui-add_btn_hover') : (selectValue && 'kzui-clickable kzui-add_btn_hover')
+            }`}
+            onClick={() => onChangeHandler(selectValue)}
+            disabled={isMulti ? isDisabledMulti : isDisabled}
+          >
+            Add
+          </button>
+        </div>
+        <div className='kzui-added_list'>
+          <h4>My added list</h4>
+          {allSelectedData.map((singleData, index) => (
+            <div key={index} className='kzui-added_list_div kzui-display_flex '>
+              <p>{index + 1}. </p>
+              {isMulti ? (
+                <ul>
+                  {singleData.data.map((item) => (
+                    <li key={item.name}>{item.name}</li>
+                  ))}
+                </ul>
+              ) : (
+                <p>{singleData.name}</p>
+              )}
+              <button
+                className='kzui-delete_button'
+                onClick={() => handleDelete(singleData.id)}
+              >
+                Delete
+              </button>
+            </div>
+          ))}
+        </div>
+      </div>
+      <div className='kzui-margin_top kzui-menu_box'>
+        <button onClick={() => onMenuOpen()} className='kzui-menu_button'>
+          Menu
+        </button>
+      </div>
+    </>
+  );
+};
+
+export default CustomSelect;
